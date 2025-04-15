@@ -1,0 +1,1 @@
+{"uuid":"40c4ea45-4e14-4839-80cd-f6db61e779fd","name":"Tests.LoginTest","children":["f630c765-3e44-49e2-bf62-2d220c8c2ade"],"befores":[{"name":"appiumDriverSetUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1744373225556,"stop":1744373230252}],"afters":[],"start":1744373225459,"stop":1744373246528}

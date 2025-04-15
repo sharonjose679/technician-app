@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Technician App Test Suite" parallel="tests" thread-count="2">
+
+    <test name="Technician App - Device 1">
+        <parameter name="deviceName" value="Samsung Tab"/>
+        <classes>
+            <class name="Tests.LoginTest"/>
+<!--            <class name="Tests.WorkOrderFlowTests"/>-->
+        </classes>
+    </test>
+    <test name="Technician App - Device 2">
+        <parameter name="deviceName" value="Samsung Galaxy S23"/>
+        <classes>
+            <class name="Tests.LoginTest"/>
+<!--            <class name="Tests.WorkOrderFlowTests"/>-->
+        </classes>
+    </test>
+</suite>

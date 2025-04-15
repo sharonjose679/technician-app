@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Technician App Test Suite">
+    <test name="Technician App - End To End Flow Test">
+        <parameter name="deviceName" value="Samsung Galaxy S23"/>
+        <classes>
+<!--            <class name="Tests.LoginTest"/>-->
+                        <class name="Tests.WorkOrderFlowTests"/>
+        </classes>
+    </test>
+</suite>

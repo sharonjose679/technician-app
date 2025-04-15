@@ -1,0 +1,32 @@
+{
+  "devices": [
+    {
+      "platformName": "Android",
+      "platformVersion": "11",
+      "deviceName": "Samsung Galaxy Tab Active 3",
+      "automationName": "UiAutomator2",
+      "appiumServer": "http://127.0.0.1:4723"
+    },
+    {
+      "platformName": "Android",
+      "platformVersion": "14",
+      "deviceName": "Galaxy_S23 Android 14",
+      "automationName": "UiAutomator2",
+      "appiumServer": "http://127.0.0.1:4725"
+    }
+  ],
+  "credentials": {
+    "technician": {
+      "email": "keran.ali@yopmail.com",
+      "password": "Staff@123"
+    },
+    "tpc": {
+      "email": "lunar.transports@yopmail.com",
+      "password": "Tpcrules@123"
+    },
+    "approver2": {
+      "email": "ishan.khaled@yopmail.com",
+      "password": "Staff@123"
+    }
+  }
+}
