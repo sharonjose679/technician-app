@@ -2,14 +2,14 @@
 <suite name="Technician App Test Suite" parallel="tests" thread-count="2">
 
     <test name="Technician App - Device 1">
-        <parameter name="deviceName" value="Samsung Tab"/>
+        <parameter name="deviceName" value="Samsung_Galaxy_Tab_Active_3"/>
         <classes>
             <class name="Tests.LoginTest"/>
 <!--            <class name="Tests.WorkOrderFlowTests"/>-->
         </classes>
     </test>
     <test name="Technician App - Device 2">
-        <parameter name="deviceName" value="Samsung Galaxy S23"/>
+        <parameter name="deviceName" value="Galaxy_S23_Android_14"/>
         <classes>
             <class name="Tests.LoginTest"/>
 <!--            <class name="Tests.WorkOrderFlowTests"/>-->

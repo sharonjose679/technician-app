@@ -3,14 +3,14 @@
     {
       "platformName": "Android",
       "platformVersion": "11",
-      "deviceName": "Samsung Galaxy Tab Active 3",
+      "deviceName": "Samsung_Galaxy_Tab_Active_3",
       "automationName": "UiAutomator2",
       "appiumServer": "http://127.0.0.1:4723"
     },
     {
       "platformName": "Android",
       "platformVersion": "14",
-      "deviceName": "Galaxy_S23 Android 14",
+      "deviceName": "Galaxy_S23_Android_14",
       "automationName": "UiAutomator2",
       "appiumServer": "http://127.0.0.1:4725"
     }

@@ -16,18 +16,6 @@ public class JsonFileReader {
     private static final String FILE_PATH = "resources/TestData/config.json";
     private static JSONObject jsonObject;
 
-//    public static String getJsonData(String key) throws IOException, ParseException {
-//        File file = new File(System.getProperty("user.dir") + "/" + FILE_PATH);
-//
-//        if (!file.exists()) {
-//            throw new IOException("JSON file not found at: " + file.getAbsolutePath());
-//        }
-//
-//        JSONParser parser = new JSONParser();
-//        JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
-//        return (String) jsonObject.get(key);
-//    }
-
     static {
         try {
             File file = new File(System.getProperty("user.dir") + "/" + FILE_PATH);
@@ -43,6 +31,17 @@ public class JsonFileReader {
         JSONArray devices = (JSONArray) jsonObject.get("devices");
 
         return (JSONObject) devices.get(index);
+    }
+
+    public static JSONObject getDeviceConfigByName(String deviceName) {
+        JSONArray devices = (JSONArray) jsonObject.get("devices");
+        for (Object obj : devices) {
+            JSONObject device = (JSONObject) obj;
+            if (device.get("deviceName").toString().equalsIgnoreCase(deviceName)) {
+                return device;
+            }
+        }
+        throw new IllegalArgumentException("Device not found in config.json: " + deviceName);
     }
 
     public static JSONObject getCredentials(String role) {

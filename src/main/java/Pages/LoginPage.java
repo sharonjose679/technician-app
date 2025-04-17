@@ -83,9 +83,10 @@ public class LoginPage {
 
     //Actions
     @Step("Enter Email")
-    public void enterEmail() throws IOException, ParseException {
+    public void enterEmail() throws IOException, ParseException, InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(emailTextBox)).click();
         String emailId = emailTextBox.getText();
+        Thread.sleep(2000);
         //String expectedEmail = JsonFileReader.getJsonData("email");
         if (!emailId.isEmpty()) {
             if (emailId.equals(expectedEmail)) {
@@ -100,7 +101,7 @@ public class LoginPage {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         emailTextBox.sendKeys(expectedEmail);
-        System.out.println("Email entered" + expectedEmail);
+        System.out.println("\nEmail entered " + expectedEmail);
     }
 
     @Step("Enter Password")

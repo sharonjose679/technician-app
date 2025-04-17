@@ -27,7 +27,10 @@ public class WorkOrderPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(xpath = "new UiSelector().description(\"KA Keran ALi Technician Senior Engine Pending: 1 m Manufacture Nissan Model Oil Seal Qty Needed 1 Unit Service Tag Service Part Status --- Request\")\n")
+//    @AndroidFindBy(xpath = "new UiSelector().description(\"KA Keran ALi Technician Senior Engine Pending: 1 m Manufacture Nissan Model Oil Seal Qty Needed 1 Unit Service Tag Service Part Status --- Request\")\n")
+//    private WebElement firstPartRequest;
+
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,\"Request\")][1]")
     private WebElement firstPartRequest;
 
     @FindBy(xpath = "(//android.widget.Button[@content-desc=\"Start Task\"])[1]")

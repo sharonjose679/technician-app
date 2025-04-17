@@ -10,7 +10,7 @@ public class TPCLoginTokenGenerator {
         // Replace with your authentication endpoint URL
         String authUrl = "https://saas-stage.wiot360.com/api/auth/external/sign-in";
         // Replace with the necessary body or credentials for authentication
-        String requestBody = "{ \"email\": \"" + username + "\", \"password\": \"" + password + "\", \"portal\": \"tpc\", \"timezone\": \"Asia/Dubai\"}";
+        String requestBody = "{ \"email\": \"" + username + "\", \"password\": \"" + password + "\", \"portal\": \"tpc\", \"client\":\"PORTAL\", \"timezone\": \"Asia/Dubai\"}";
 
         // Send a POST request to get the JWT token
         Response response = RestAssured.given()

@@ -47,17 +47,31 @@ public class AssetInspectionPage {
 //    private WebElement imageUpload;
 
     @AndroidFindBy(accessibility = "Upload Image")
-    private WebElement  imageUpload;
+    private WebElement imageUpload;
 
-//    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"Camera\n" +
-//            "Media Picker\"]/android.view.View[3]")
-//    private WebElement mediaPicker;
-
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(5)\n")
+    @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,\"Media Picker\")]/android.view.View[3]")
     private WebElement mediaPicker;
 
+//    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(5)\n")
+//    private WebElement mediaPicker;
 
-//    @FindBy(xpath = "//android.widget.ImageView[@resource-id='com.google.android.documentsui:id/icon_thumb']")
+    @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,\"Media Picker\")]/android.view.View[2]")
+    private WebElement cameraPicker;
+
+    @AndroidFindBy(accessibility = "Shutter")
+    private WebElement cameraClickButton;
+
+//    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"Shutter\"]")
+//    private WebElement cameraClickButton;
+
+    @AndroidFindBy(accessibility = "Done")
+    private WebElement cameraDone;
+
+    @FindBy(xpath = "//android.widget.Button[contains(@resource-id,\"permission_allow_foreground_only_button\")]")
+    private WebElement permissionWhileUsingApp;
+
+
+    //    @FindBy(xpath = "//android.widget.ImageView[@resource-id='com.google.android.documentsui:id/icon_thumb']")
 //    private List<WebElement> imageThumbNail;
     @FindBy(xpath = "//android.widget.ImageView[contains(@resource-id,'com.google.android') and contains(@resource-id, 'icon_thumb')]")
     private List<WebElement> imageThumbNail;
@@ -101,6 +115,9 @@ public class AssetInspectionPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)\n")
     private WebElement inspectionBackNav;
 
+    @AndroidFindBy(accessibility = "Completed")
+    private WebElement completedLabel;
+
     public void enterBasicDetails() {
         wait.until(ExpectedConditions.elementToBeClickable(serviceBay)).click();
         serviceBay.sendKeys("10B");
@@ -124,7 +141,7 @@ public class AssetInspectionPage {
         //Upload images for Inside section
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(imageUpload)).click();
-       // Thread.sleep(3000);
+        // Thread.sleep(3000);
         // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(mediaPicker)).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -160,6 +177,52 @@ public class AssetInspectionPage {
             System.out.println("No images found");
     }
 
+    //To fetch image from camera
+    public void enterInspectionDetailsByCam() throws InterruptedException {
+        wait.until(ExpectedConditions.elementToBeClickable(insideInspectionNextButton)).click();
+        //Thread.sleep(3000);
+        getImageFromCamera();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(outsideInspectionNextButton)).click();
+        Thread.sleep(3000);
+        getImageFromCamera();
+        System.out.println("Inspection Details entered");
+    }
+
+    public void getImageFromCamera() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(imageUpload)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cameraPicker)).click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        if (permissionWhileUsingApp.isDisplayed()) {
+//            wait.until(ExpectedConditions.elementToBeClickable(permissionWhileUsingApp)).click();
+//        }
+        wait.until(ExpectedConditions.elementToBeClickable(cameraClickButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cameraDone)).click();
+        System.out.println("First image uploaded");
+        wait.until(ExpectedConditions.elementToBeClickable(inspectionRightTab)).click();
+        uploadFromCamera();
+        System.out.println("Second image uploaded");
+        wait.until(ExpectedConditions.elementToBeClickable(inspectionLeftTab)).click();
+        uploadFromCamera();
+        System.out.println("Third image uploaded");
+        wait.until(ExpectedConditions.elementToBeClickable(inspectionBackTab)).click();
+        uploadFromCamera();
+        System.out.println("Fourth image uploaded");
+        wait.until(ExpectedConditions.elementToBeClickable(assetInspectionBackButton)).click();
+        System.out.println("All Images uploaded");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+    }
+
+    public void uploadFromCamera() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(imageUpload)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cameraPicker)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cameraClickButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cameraDone)).click();
+    }
+
     public void submitInspection() {
         driver.pressKey(new KeyEvent(AndroidKey.TAB));
         wait.until(ExpectedConditions.elementToBeClickable(inspectionSubmitButton)).click();
@@ -187,5 +250,12 @@ public class AssetInspectionPage {
         driver.pressKey(new KeyEvent(AndroidKey.TAB));
         wait.until(ExpectedConditions.elementToBeClickable(inspectionSubmitButton)).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
+
+    public boolean checkCompletedStatus() {
+        if (completedLabel.isDisplayed())
+            return true;
+        else
+            return false;
     }
 }

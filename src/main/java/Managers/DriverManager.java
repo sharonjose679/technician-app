@@ -23,12 +23,13 @@ public class DriverManager {
         if (!appFile.exists()) {
             throw new IOException("APK File not found at: " + appFile.getAbsolutePath());
         }
-        if (name.equalsIgnoreCase("Samsung Tab")) {
-            device = JsonFileReader.getDeviceConfig(0);
-        } else if (name.equalsIgnoreCase("Samsung Galaxy S23")) {
-            device = JsonFileReader.getDeviceConfig(1);
-
-        }
+//        if (name.equalsIgnoreCase("Samsung Tab")) {
+//            device = JsonFileReader.getDeviceConfig(0);
+//        } else if (name.equalsIgnoreCase("Samsung Galaxy S23")) {
+//            device = JsonFileReader.getDeviceConfig(1);
+//
+//        }
+        device = JsonFileReader.getDeviceConfigByName(name);
         platformName = (String) device.get("platformName");
         platformVersion = (String) device.get("platformVersion");
         deviceName = (String) device.get("deviceName");

@@ -19,7 +19,7 @@ public class WorkOrderFlowTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify the work order is able to complete from technician APP")
     @Test(enabled = true)
-    public void verifyScheduledWorkOrderLists() throws IOException, ParseException, InterruptedException {
+    public void verifyWorkOrderCompletionWithoutPartRequest() throws IOException, ParseException, InterruptedException {
         String orderId = WorkOrderCreationAPI.createMaintenanceOrder();
         TechnicianAssignmentAPI.assignTechnician(orderId);
         FleetOfficerApprovalAPI.approveAsFleetOfficer();
@@ -46,7 +46,35 @@ public class WorkOrderFlowTests extends BaseTest {
         inspection.enterBasicDetails();
         inspection.enterInspectionDetails();
         inspection.updateMaintenance();
+        boolean woStatus = inspection.checkCompletedStatus();
+        Assert.assertTrue(woStatus, "Work Order Status not changed to completed");
 
     }
+
+//    @Test(enabled = false)
+//    public void verifyWorkOrderCompletionWithPartRequest() throws InterruptedException, IOException, ParseException {
+//        String orderId = WorkOrderCreationAPI.createMaintenanceOrder();
+//        TechnicianAssignmentAPI.assignTechnician(orderId);
+//        FleetOfficerApprovalAPI.approveAsFleetOfficer();
+//        WorkOrderScheduling.scheduleWorkOrder(orderId);
+//        LoginPage login = new LoginPage(driver);
+//        login.techAppLogin();
+//        DashBoardPage dashboard = new DashBoardPage(driver);
+//        dashboard.clickScheduledStatus();
+//        TasksListPage tasks = new TasksListPage(driver);
+//        tasks.clickTaskNextButton();
+//        WorkOrderDetailsPage details = new WorkOrderDetailsPage(driver);
+//        details.clickStartWorkOrder();
+//        details.clickConfirmationYes();
+//        AssetInspectionPage inspection = new AssetInspectionPage(driver);
+//        inspection.enterBasicDetails();
+//        inspection.enterInspectionDetailsByCam();
+//        inspection.submitInspection();
+//        boolean flag = inspection.checkStatusChangeToInProgress();
+//        Assert.assertTrue(flag);
+//        WorkOrderPage woPage = new WorkOrderPage(driver);
+//        woPage.requestPart();
+//        // woPage.startTask();
+//    }
 
 }
