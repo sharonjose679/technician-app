@@ -9,7 +9,7 @@ pipeline {
         }
  stage('Start Emulator & Appium') {
             steps {
-                bat 'start_galaxy_tab.bat'
+                bat 'start_tab_jenkins.bat'
             }
         }
 
