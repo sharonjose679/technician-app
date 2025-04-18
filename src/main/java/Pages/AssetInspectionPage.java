@@ -9,6 +9,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AndroidFindBySet;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -137,10 +138,29 @@ public class AssetInspectionPage {
         System.out.println("Inspection Details entered");
     }
 
+    public void safeClickUploadImage() {
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                WebElement uploadImageBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Upload Image")));
+                uploadImageBtn.click();
+                return;
+            } catch (StaleElementReferenceException e) {
+                System.out.println("StaleElementReferenceException caught, retrying... Attempt: " + (attempts + 1));
+            } catch (Exception e) {
+                System.out.println("Other exception: " + e.getMessage());
+            }
+            attempts++;
+        }
+        throw new RuntimeException("Failed to click Upload Image after multiple attempts");
+    }
+
     public void uploadImage() throws InterruptedException {
         //Upload images for Inside section
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(imageUpload)).click();
+//        WebElement uploadImageBtn = driver.findElement(AppiumBy.accessibilityId("Upload Image"));
+//        wait.until(ExpectedConditions.elementToBeClickable(uploadImageBtn)).click();
+        safeClickUploadImage();
         // Thread.sleep(3000);
         // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(mediaPicker)).click();
@@ -168,7 +188,9 @@ public class AssetInspectionPage {
 
     public void upload() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(imageUpload)).click();
+//        WebElement uploadImageBtn = driver.findElement(AppiumBy.accessibilityId("Upload Image"));
+//        wait.until(ExpectedConditions.elementToBeClickable(uploadImageBtn)).click();
+        safeClickUploadImage();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(mediaPicker)).click();
         if (!imageThumbNail.isEmpty()) {
@@ -191,7 +213,9 @@ public class AssetInspectionPage {
 
     public void getImageFromCamera() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(imageUpload)).click();
+//        WebElement uploadImageBtn = driver.findElement(AppiumBy.accessibilityId("Upload Image"));
+//        wait.until(ExpectedConditions.elementToBeClickable(uploadImageBtn)).click();
+        safeClickUploadImage();
         wait.until(ExpectedConditions.elementToBeClickable(cameraPicker)).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 //        if (permissionWhileUsingApp.isDisplayed()) {
@@ -217,7 +241,9 @@ public class AssetInspectionPage {
 
     public void uploadFromCamera() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(imageUpload)).click();
+//        WebElement uploadImageBtn = driver.findElement(AppiumBy.accessibilityId("Upload Image"));
+//        wait.until(ExpectedConditions.elementToBeClickable(uploadImageBtn)).click();
+        safeClickUploadImage();
         wait.until(ExpectedConditions.elementToBeClickable(cameraPicker)).click();
         wait.until(ExpectedConditions.elementToBeClickable(cameraClickButton)).click();
         wait.until(ExpectedConditions.elementToBeClickable(cameraDone)).click();
@@ -230,9 +256,10 @@ public class AssetInspectionPage {
     }
 
     public boolean checkStatusChangeToInProgress() {
-        if (inProgress.isDisplayed())
+        if (inProgress.isDisplayed()) {
+            System.out.println("Work Order Started and In-Progress");
             return true;
-        else
+        } else
             return false;
     }
 
@@ -253,9 +280,10 @@ public class AssetInspectionPage {
     }
 
     public boolean checkCompletedStatus() {
-        if (completedLabel.isDisplayed())
+        if (completedLabel.isDisplayed()) {
+            System.out.println("Work Order Completed");
             return true;
-        else
+        } else
             return false;
     }
 }

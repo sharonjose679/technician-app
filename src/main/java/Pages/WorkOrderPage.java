@@ -67,6 +67,7 @@ public class WorkOrderPage {
         wait.until(ExpectedConditions.elementToBeClickable(startTask)).click();
         // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(confirmYes)).click();
+        System.out.println("First Task Started");
 
         //To scroll down Method 1
       /*  JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -108,12 +109,13 @@ public class WorkOrderPage {
 
         wait.until(ExpectedConditions.elementToBeClickable(startTask)).click();
         wait.until(ExpectedConditions.elementToBeClickable(confirmYes)).click();
+        System.out.println("Second Task Started");
     }
 
     public void completeTask() {
         wait.until(ExpectedConditions.elementToBeClickable(completeTask)).click();
         wait.until(ExpectedConditions.elementToBeClickable(confirmYes)).click();
-
+        System.out.println("First Task Completed");
         /*
         JavascriptExecutor js = (JavascriptExecutor) driver;
         HashMap<String, Object> params = new HashMap<>();
@@ -133,6 +135,7 @@ public class WorkOrderPage {
         wait.until(ExpectedConditions.elementToBeClickable(confirmYes)).click();
         wait.until(ExpectedConditions.elementToBeClickable(completeButton)).click();
         wait.until(ExpectedConditions.elementToBeClickable(confirmYes)).click();
+        System.out.println("Second Task Completed");
     }
 
 }

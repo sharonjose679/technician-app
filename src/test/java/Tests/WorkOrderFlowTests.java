@@ -34,6 +34,7 @@ public class WorkOrderFlowTests extends BaseTest {
         details.clickStartWorkOrder();
         details.clickConfirmationYes();
         AssetInspectionPage inspection = new AssetInspectionPage(driver);
+        System.out.println("****** Check-In Inspection ******");
         inspection.enterBasicDetails();
         inspection.enterInspectionDetails();
         inspection.submitInspection();
@@ -43,6 +44,7 @@ public class WorkOrderFlowTests extends BaseTest {
         //woPage.requestPart();
         woPage.startTask();
         woPage.completeTask();
+        System.out.println("****** Check-Out Inspection ******");
         inspection.enterBasicDetails();
         inspection.enterInspectionDetails();
         inspection.updateMaintenance();
