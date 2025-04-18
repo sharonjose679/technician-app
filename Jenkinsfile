@@ -9,8 +9,7 @@ pipeline {
         }
  stage('Start Emulator & Appium') {
             steps {
-                bat 'start_tab_jenkins.bat'
-            }
+                 bat 'powershell -ExecutionPolicy Bypass -File start_tab_jenkins.ps1'            }
         }
 
         stage('Build & Run Tests') {
