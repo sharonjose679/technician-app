@@ -50,8 +50,11 @@ public class WorkOrderFlowTests extends BaseTest {
         inspection.updateMaintenance();
         boolean woStatus = inspection.checkCompletedStatus();
         Assert.assertTrue(woStatus, "Work Order Status not changed to completed");
-
+        inspection.back();
+        boolean lgOut = login.logOut();
+        Assert.assertTrue(lgOut, "Logout not successful");
     }
+
 
 //    @Test(enabled = false)
 //    public void verifyWorkOrderCompletionWithPartRequest() throws InterruptedException, IOException, ParseException {

@@ -18,4 +18,9 @@ pipeline {
             }
         }
     }
+post {
+        always {
+            archiveArtifacts artifacts: '**/screenshots/*.png', fingerprint: true
+        }
+    }
 }

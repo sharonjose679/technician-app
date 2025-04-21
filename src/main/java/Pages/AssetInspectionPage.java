@@ -119,6 +119,9 @@ public class AssetInspectionPage {
     @AndroidFindBy(accessibility = "Completed")
     private WebElement completedLabel;
 
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]")
+    private WebElement backButtonComp;
+
     public void enterBasicDetails() {
         wait.until(ExpectedConditions.elementToBeClickable(serviceBay)).click();
         serviceBay.sendKeys("10B");
@@ -285,5 +288,9 @@ public class AssetInspectionPage {
             return true;
         } else
             return false;
+    }
+    public void back()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(backButtonComp)).click();
     }
 }

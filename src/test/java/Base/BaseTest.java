@@ -1,8 +1,10 @@
 package Base;
 
 import Managers.DriverManager;
+import Utils.ScreenshotUtil;
 import io.appium.java_client.android.AndroidDriver;
 import org.json.simple.parser.ParseException;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.IOException;
@@ -24,6 +26,13 @@ public class BaseTest {
             e.printStackTrace();
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
+
+    @AfterMethod
+    public void captureScreenshotOnFailure(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            ScreenshotUtil.captureScreenshot(driver, "TestFailure");
+        }
     }
 
     @AfterClass
